@@ -1,8 +1,10 @@
 package util
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 )
 
 //CWD 获取程序当前目录
@@ -20,4 +22,10 @@ func Exist(path string) bool {
 		return false
 	}
 	return true
+}
+
+//FloatToInt 浮点型转换为整型
+func FloatToInt(f float64) int {
+	i, _ := strconv.Atoi(fmt.Sprintf("%1.0f", f))
+	return i
 }
