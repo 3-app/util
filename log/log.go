@@ -1,7 +1,8 @@
-package util
+package log
 
 import (
 	"fmt"
+	"github.com/3-app/util"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/sirupsen/logrus"
 	"os"
@@ -13,7 +14,7 @@ var log *logrus.Logger
 func Init() {
 	logDir := os.Getenv("LOG_DIR")
 	if logDir == "" {
-		logDir = fmt.Sprintf("%s/logs", CWD())
+		logDir = fmt.Sprintf("%s/logs", util.CWD())
 	}
 	log = logrus.New()
 	//log.SetFormatter(&logrus.JSONFormatter{})
