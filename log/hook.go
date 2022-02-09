@@ -44,7 +44,7 @@ func findCaller(skip int) string {
 	line := 0
 	for i := 0; i < 10; i++ {
 		file, line = getCaller(skip + i)
-		fmt.Println(file)
+		//fmt.Println(file)
 		if !strings.HasPrefix(file, "logrus")  && !strings.HasPrefix(file, "log/log.go"){
 			break
 		}
