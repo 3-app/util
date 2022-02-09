@@ -1,9 +1,9 @@
 package log
+
 import (
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"runtime"
-	"strings"
 )
 // ContextHook for log the call context
 type contextHook struct {
@@ -43,7 +43,8 @@ func findCaller(skip int) string {
 	line := 0
 	for i := 0; i < 10; i++ {
 		file, line = getCaller(skip + i)
-		if !strings.HasPrefix(file, "logrus") {
+		if i == skip {
+			//fmt.Printf("file:%s line:%d\n",file,line)
 			break
 		}
 	}
@@ -55,8 +56,7 @@ func findCaller(skip int) string {
 // 因为文件的全路径往往很长, 而文件名在多个包中往往有重复, 因此这里选择多取一层, 取到文件所在的上层目录那层.
 func getCaller(skip int) (string, int) {
 	_, file, line, ok := runtime.Caller(skip)
-	//fmt.Println(file)
-	//fmt.Println(line)
+	//fmt.Printf("file:%s line:%d\n",file,line)
 	if !ok {
 		return "", 0
 	}
