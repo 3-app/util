@@ -17,6 +17,7 @@ func Init() {
 		logDir = fmt.Sprintf("%s/logs", util.CWD())
 	}
 	log = logrus.New()
+	log.Hooks.Add(NewContextHook())  //增加行号hook
 	//log.SetFormatter(&logrus.JSONFormatter{})
 	name := fmt.Sprintf("%s/log", logDir)
 
