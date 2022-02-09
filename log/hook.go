@@ -12,11 +12,11 @@ type contextHook struct {
 	levels []logrus.Level
 }
 // NewContextHook use to make an hook
-// 根据上面的推断, 我们递归深度可以设置到5即可.
+// 根据上面的推断, 我们递归深度可以设置到6即可.
 func NewContextHook(levels ...logrus.Level) logrus.Hook {
 	hook := contextHook{
 		Field:  "line",
-		Skip:   5,
+		Skip:   6,
 		levels: levels,
 	}
 	if len(hook.levels) == 0 {
