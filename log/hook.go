@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"runtime"
+	"strings"
 )
 // ContextHook for log the call context
 type contextHook struct {
@@ -12,11 +13,11 @@ type contextHook struct {
 	levels []logrus.Level
 }
 // NewContextHook use to make an hook
-// 根据上面的推断, 我们递归深度可以设置到6即可.
+// 根据上面的推断, 我们递归深度可以设置到5即可.
 func NewContextHook(levels ...logrus.Level) logrus.Hook {
 	hook := contextHook{
 		Field:  "line",
-		Skip:   6,
+		Skip:   5,
 		levels: levels,
 	}
 	if len(hook.levels) == 0 {
@@ -43,8 +44,8 @@ func findCaller(skip int) string {
 	line := 0
 	for i := 0; i < 10; i++ {
 		file, line = getCaller(skip + i)
-		if i == skip {
-			//fmt.Printf("file:%s line:%d\n",file,line)
+		fmt.Println(file)
+		if !strings.HasPrefix(file, "logrus")  && !strings.HasPrefix(file, "log/log.go"){
 			break
 		}
 	}
@@ -56,7 +57,8 @@ func findCaller(skip int) string {
 // 因为文件的全路径往往很长, 而文件名在多个包中往往有重复, 因此这里选择多取一层, 取到文件所在的上层目录那层.
 func getCaller(skip int) (string, int) {
 	_, file, line, ok := runtime.Caller(skip)
-	//fmt.Printf("file:%s line:%d\n",file,line)
+	//fmt.Println(file)
+	//fmt.Println(line)
 	if !ok {
 		return "", 0
 	}
