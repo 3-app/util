@@ -18,9 +18,7 @@ func Init() {
 	}
 	log = logrus.New()
 	//log.Hooks.Add(NewContextHook())  //增加行号hook
-	log.SetFormatter(&logrus.JSONFormatter{
-		DisableHTMLEscape: true,
-	})
+	//log.SetFormatter(&logrus.JSONFormatter{})
 	name := fmt.Sprintf("%s/log", logDir)
 
 	writer, _ := rotatelogs.New(
@@ -37,7 +35,7 @@ func Init() {
 }
 
 func GetLogger() *logrus.Logger {
-	if log == nil {
+	if log == nil{
 		Init()
 	}
 	return log
