@@ -2,7 +2,6 @@ package log
 
 import (
 	"fmt"
-	"github.com/3-app/util"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/sirupsen/logrus"
 	"os"
@@ -14,7 +13,7 @@ var log *logrus.Logger
 func Init() {
 	logDir := os.Getenv("LOG_DIR")
 	if logDir == "" {
-		logDir = fmt.Sprintf("%s/logs", util.CWD())
+		logDir = "/data"
 	}
 	log = logrus.New()
 	//log.Hooks.Add(NewContextHook())  //增加行号hook
@@ -35,7 +34,7 @@ func Init() {
 }
 
 func GetLogger() *logrus.Logger {
-	if log == nil{
+	if log == nil {
 		Init()
 	}
 	return log
