@@ -15,6 +15,7 @@ func Init() {
 	if logDir == "" {
 		logDir = "/data"
 	}
+	//测试记录
 	log = logrus.New()
 	//log.Hooks.Add(NewContextHook())  //增加行号hook
 	//log.SetFormatter(&logrus.JSONFormatter{})
