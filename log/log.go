@@ -22,10 +22,10 @@ func Init() {
 	name := fmt.Sprintf("%s/log", logDir)
 
 	writer, _ := rotatelogs.New(
-		name+"_%Y-%m-%d.log",
-		rotatelogs.WithLinkName(name),             // 生成软链，指向最新日志文件
-		rotatelogs.WithRotationTime(time.Hour*24), // 日志切割时间间隔
-		rotatelogs.WithMaxAge(time.Hour*24*3),     //设置文件清理前的最长保存时间
+		name+"_%Y-%m-%d-%H.log",
+		rotatelogs.WithLinkName(name),          // 生成软链，指向最新日志文件
+		rotatelogs.WithRotationTime(time.Hour), // 日志切割时间间隔
+		rotatelogs.WithMaxAge(time.Hour),       //设置文件清理前的最长保存时间
 	)
 	log.SetOutput(writer)
 
